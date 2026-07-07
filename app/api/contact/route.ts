@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   const smtpPort = Number(settings.smtpPort || 587);
   const smtpSecure = settings.smtpSecure === "true" || smtpPort === 465;
   const smtpUser = settings.smtpUser;
-  const smtpPass = settings.smtpPass;
+  const smtpPass = settings.smtpPass?.replace(/\s+/g, "");
   const adminEmail = settings.adminEmail || settings.email;
 
   if (!smtpUser || !smtpPass || !adminEmail) {
@@ -60,29 +60,37 @@ export async function POST(request: Request) {
     }
   });
 
-  await transporter.sendMail({
-    from: settings.smtpFrom || smtpUser,
-    to: adminEmail,
-    replyTo: input.email,
-    subject: `New enquiry from ${input.name}`,
-    text: [
-      `Name: ${input.name}`,
-      `Phone: ${input.phone}`,
-      `Email: ${input.email}`,
-      "",
-      input.message
-    ].join("\n"),
-    html: `
-      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#222">
-        <h2>New website enquiry</h2>
-        <p><strong>Name:</strong> ${escapeHtml(input.name)}</p>
-        <p><strong>Phone:</strong> ${escapeHtml(input.phone)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(input.email)}</p>
-        <p><strong>Requirement:</strong></p>
-        <p>${escapeHtml(input.message).replace(/\n/g, "<br>")}</p>
-      </div>
-    `
-  });
+  try {
+    await transporter.sendMail({
+      from: settings.smtpFrom || smtpUser,
+      to: adminEmail,
+      replyTo: input.email,
+      subject: `New enquiry from ${input.name}`,
+      text: [
+        `Name: ${input.name}`,
+        `Phone: ${input.phone}`,
+        `Email: ${input.email}`,
+        "",
+        input.message
+      ].join("\n"),
+      html: `
+        <div style="font-family:Arial,sans-serif;line-height:1.6;color:#222">
+          <h2>New website enquiry</h2>
+          <p><strong>Name:</strong> ${escapeHtml(input.name)}</p>
+          <p><strong>Phone:</strong> ${escapeHtml(input.phone)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(input.email)}</p>
+          <p><strong>Requirement:</strong></p>
+          <p>${escapeHtml(input.message).replace(/\n/g, "<br>")}</p>
+        </div>
+      `
+    });
+  } catch (error) {
+    console.error("Contact email failed", error);
+    return NextResponse.json(
+      { message: "Message saved, but email could not be sent. Please check SMTP settings." },
+      { status: 502 }
+    );
+  }
 
   return NextResponse.json({ ok: true, message: "Enquiry sent successfully." });
 }
