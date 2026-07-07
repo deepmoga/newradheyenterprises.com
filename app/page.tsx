@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   ChevronDown,
   Clock3,
+  Container,
   ExternalLink,
   FileCheck2,
   Globe2,
@@ -133,14 +134,28 @@ export default function Home() {
 
       <section className="section about" id="about">
         <div className="container split">
-          <div className="image-stack">
-            <Image
-              src="/images/box-with-men.webp"
-              alt="Cargo boxes prepared for international shipment"
-              width={796}
-              height={948}
-              sizes="(max-width: 900px) 100vw, 44vw"
-            />
+          <div className="trade-visual" aria-label="Animated import export logistics illustration">
+            <div className="trade-visual__globe">
+              <div className="trade-visual__orbit trade-visual__orbit--one" />
+              <div className="trade-visual__orbit trade-visual__orbit--two" />
+              <div className="trade-visual__continent trade-visual__continent--one" />
+              <div className="trade-visual__continent trade-visual__continent--two" />
+              <div className="trade-visual__pin trade-visual__pin--one" />
+              <div className="trade-visual__pin trade-visual__pin--two" />
+              <Ship className="trade-visual__ship" size={56} aria-hidden="true" />
+              <PackageCheck className="trade-visual__package" size={46} aria-hidden="true" />
+              <Container className="trade-visual__container" size={50} aria-hidden="true" />
+            </div>
+            <div className="trade-visual__route trade-visual__route--air" />
+            <div className="trade-visual__route trade-visual__route--sea" />
+            <div className="trade-visual__card trade-visual__card--export">
+              <span>Export</span>
+              <strong>India to Worldwide</strong>
+            </div>
+            <div className="trade-visual__card trade-visual__card--source">
+              <span>Sourcing</span>
+              <strong>China & India</strong>
+            </div>
             <div className="experience-badge">
               <strong>5+</strong>
               <span>Years helping businesses trade globally</span>
@@ -364,7 +379,7 @@ export default function Home() {
                   <div className="gr-card__avatar">
                     {review.name.charAt(0)}
                   </div>
-                  <div>
+                  <div className="gr-card__meta">
                     <strong>{review.name}</strong>
                     <span>{review.date}</span>
                   </div>
