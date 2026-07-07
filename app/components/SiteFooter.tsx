@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Mail, MapPin, Phone } from "lucide-react";
-import { companySettings, productPages, serviceSummaries } from "../site-data";
+import { useSiteSettings } from "../lib/use-site-settings";
+import { productPages, serviceSummaries } from "../site-data";
 
 const footerColumns = [
   {
@@ -72,6 +75,8 @@ function WhatsAppIcon() {
 }
 
 export function SiteFooter() {
+  const companySettings = useSiteSettings();
+
   return (
     <footer className="footer">
       <div className="container footer__logo-wrap">

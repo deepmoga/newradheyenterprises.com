@@ -5,10 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronRight, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { companySettings, productPages, serviceSummaries } from "../site-data";
+import { useSiteSettings } from "../lib/use-site-settings";
+import { productPages, serviceSummaries } from "../site-data";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const companySettings = useSiteSettings();
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
