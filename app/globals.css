@@ -858,6 +858,107 @@ p {
   bottom: 112px;
 }
 
+.about-visual-card {
+  position: relative;
+  min-height: 590px;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(232, 227, 223, 0.95);
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(34, 31, 32, 0.11);
+}
+
+.about-visual-card__image {
+  width: 100%;
+  height: 590px;
+  display: block;
+  object-fit: cover;
+}
+
+.about-visual-card__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(17, 18, 20, 0.08), rgba(17, 18, 20, 0.42)),
+    linear-gradient(135deg, rgba(207, 67, 36, 0.22), transparent 48%);
+}
+
+.about-visual-card__chip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 42px rgba(34, 31, 32, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.about-visual-card__chip--top {
+  top: 28px;
+  left: 28px;
+}
+
+.about-visual-card__chip--middle {
+  right: 28px;
+  top: 42%;
+}
+
+.about-visual-card__chip span:not(.icon-box) {
+  display: block;
+  color: var(--brand-red);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.about-visual-card__chip strong {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.about-visual-card__panel {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 28px;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+}
+
+.about-visual-card__panel div {
+  display: grid;
+  gap: 2px;
+  min-height: 86px;
+  align-content: center;
+  padding: 16px;
+  color: #ffffff;
+  background: rgba(17, 18, 20, 0.55);
+}
+
+.about-visual-card__panel span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.about-visual-card__panel strong {
+  font-size: 17px;
+  font-weight: 600;
+}
+
 .experience-badge {
   position: absolute;
   right: 6px;
@@ -882,6 +983,14 @@ p {
 .experience-badge span {
   font-weight: 800;
   line-height: 1.3;
+}
+
+.experience-badge--image {
+  right: 28px;
+  bottom: 138px;
+  z-index: 3;
+  width: min(246px, 48%);
+  background: linear-gradient(135deg, var(--brand-red), var(--brand-orange));
 }
 
 .section-copy {
@@ -961,6 +1070,13 @@ p {
 .icon-box--light {
   color: var(--brand-red);
   background: rgba(207, 67, 36, 0.1);
+}
+
+.icon-box--small {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  flex: 0 0 42px;
 }
 
 .service-card a {
@@ -2287,6 +2403,38 @@ details p {
   .trade-visual__container {
     border-radius: 14px;
     padding: 9px;
+  }
+
+  .about-visual-card {
+    min-height: auto;
+    border-radius: 14px;
+  }
+
+  .about-visual-card__image {
+    height: 460px;
+  }
+
+  .about-visual-card__chip--top {
+    top: 16px;
+    left: 16px;
+  }
+
+  .about-visual-card__chip--middle {
+    top: 116px;
+    right: 16px;
+  }
+
+  .experience-badge--image {
+    left: 16px;
+    right: auto;
+    bottom: 116px;
+    width: min(260px, calc(100% - 32px));
+  }
+
+  .about-visual-card__panel {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
   }
 
   .hero__actions,

@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   ChevronDown,
   Clock3,
-  Container,
   ExternalLink,
   FileCheck2,
   Globe2,
@@ -134,29 +133,49 @@ export default function Home() {
 
       <section className="section about" id="about">
         <div className="container split">
-          <div className="trade-visual" aria-label="Animated import export logistics illustration">
-            <div className="trade-visual__globe">
-              <div className="trade-visual__orbit trade-visual__orbit--one" />
-              <div className="trade-visual__orbit trade-visual__orbit--two" />
-              <div className="trade-visual__continent trade-visual__continent--one" />
-              <div className="trade-visual__continent trade-visual__continent--two" />
-              <div className="trade-visual__pin trade-visual__pin--one" />
-              <div className="trade-visual__pin trade-visual__pin--two" />
-              <Ship className="trade-visual__ship" size={56} aria-hidden="true" />
-              <PackageCheck className="trade-visual__package" size={46} aria-hidden="true" />
-              <Container className="trade-visual__container" size={50} aria-hidden="true" />
+          <div className="about-visual-card">
+            <Image
+              src="/images/port.webp"
+              alt="Container ship and port logistics for global import export"
+              width={720}
+              height={720}
+              sizes="(max-width: 900px) 100vw, 45vw"
+              className="about-visual-card__image"
+            />
+            <div className="about-visual-card__shade" aria-hidden="true" />
+            <div className="about-visual-card__chip about-visual-card__chip--top">
+              <span className="icon-box icon-box--small">
+                <Ship size={18} aria-hidden="true" />
+              </span>
+              <div>
+                <span>Global Shipping</span>
+                <strong>India to Worldwide</strong>
+              </div>
             </div>
-            <div className="trade-visual__route trade-visual__route--air" />
-            <div className="trade-visual__route trade-visual__route--sea" />
-            <div className="trade-visual__card trade-visual__card--export">
-              <span>Export</span>
-              <strong>India to Worldwide</strong>
+            <div className="about-visual-card__chip about-visual-card__chip--middle">
+              <span className="icon-box icon-box--small">
+                <Globe2 size={18} aria-hidden="true" />
+              </span>
+              <div>
+                <span>Trade Support</span>
+                <strong>200+ destinations</strong>
+              </div>
             </div>
-            <div className="trade-visual__card trade-visual__card--source">
-              <span>Sourcing</span>
-              <strong>China & India</strong>
+            <div className="about-visual-card__panel">
+              <div>
+                <span>Import</span>
+                <strong>Sourcing</strong>
+              </div>
+              <div>
+                <span>Export</span>
+                <strong>Delivery</strong>
+              </div>
+              <div>
+                <span>Customs</span>
+                <strong>Documents</strong>
+              </div>
             </div>
-            <div className="experience-badge">
+            <div className="experience-badge experience-badge--image">
               <strong>5+</strong>
               <span>Years helping businesses trade globally</span>
             </div>
