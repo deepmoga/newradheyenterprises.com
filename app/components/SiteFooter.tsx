@@ -76,6 +76,38 @@ function WhatsAppIcon() {
 
 export function SiteFooter() {
   const companySettings = useSiteSettings();
+  const socialLinks = [
+    {
+      href: companySettings.social.facebook,
+      label: "Facebook",
+      className: "social-icon social-icon--facebook",
+      icon: <FacebookIcon />
+    },
+    {
+      href: companySettings.social.instagram,
+      label: "Instagram",
+      className: "social-icon social-icon--instagram",
+      icon: <InstagramIcon />
+    },
+    {
+      href: companySettings.social.linkedin,
+      label: "LinkedIn",
+      className: "social-icon social-icon--linkedin",
+      icon: <LinkedInIcon />
+    },
+    {
+      href: companySettings.email ? `mailto:${companySettings.email}` : "",
+      label: "Email",
+      className: "social-icon social-icon--email",
+      icon: <Mail size={18} aria-hidden="true" />
+    },
+    {
+      href: companySettings.social.whatsapp,
+      label: "WhatsApp",
+      className: "social-icon social-icon--whatsapp",
+      icon: <WhatsAppIcon />
+    }
+  ].filter((link) => link.href.trim().length > 0);
 
   return (
     <footer className="footer">
@@ -128,53 +160,24 @@ export function SiteFooter() {
       </div>
 
       {/* ── Social icons bar ── */}
-      <div className="container footer__social-wrap">
-        <div className="footer__social" aria-label="Social links">
-          <a
-            href={companySettings.social.facebook}
-            aria-label="Facebook"
-            className="social-icon social-icon--facebook"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FacebookIcon />
-          </a>
-          <a
-            href={companySettings.social.instagram}
-            aria-label="Instagram"
-            className="social-icon social-icon--instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <InstagramIcon />
-          </a>
-          <a
-            href={companySettings.social.linkedin}
-            aria-label="LinkedIn"
-            className="social-icon social-icon--linkedin"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkedInIcon />
-          </a>
-          <a
-            href={`mailto:${companySettings.email}`}
-            aria-label="Email"
-            className="social-icon social-icon--email"
-          >
-            <Mail size={18} aria-hidden="true" />
-          </a>
-          <a
-            href={companySettings.social.whatsapp}
-            aria-label="WhatsApp"
-            className="social-icon social-icon--whatsapp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <WhatsAppIcon />
-          </a>
+      {socialLinks.length > 0 ? (
+        <div className="container footer__social-wrap">
+          <div className="footer__social" aria-label="Social links">
+            {socialLinks.map((link) => (
+              <a
+                href={link.href}
+                aria-label={link.label}
+                className={link.className}
+                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                key={link.label}
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
@@ -196,9 +199,11 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <a className="whatsapp-float" href={companySettings.social.whatsapp} aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
-        <WhatsAppIcon />
-      </a>
+      {companySettings.social.whatsapp ? (
+        <a className="whatsapp-float" href={companySettings.social.whatsapp} aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon />
+        </a>
+      ) : null}
     </footer>
   );
 }
